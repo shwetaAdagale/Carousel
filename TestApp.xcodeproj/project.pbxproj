@@ -14,6 +14,10 @@
 		84FE5A4C21A0951900C97405 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84FE5A4A21A0951900C97405 /* LaunchScreen.storyboard */; };
 		84FE5A5721A0951900C97405 /* TestAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FE5A5621A0951900C97405 /* TestAppTests.swift */; };
 		84FE5A6221A0951900C97405 /* TestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FE5A6121A0951900C97405 /* TestAppUITests.swift */; };
+		84FE5A7421A414E500C97405 /* ViewForCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FE5A7321A414E500C97405 /* ViewForCarousel.swift */; };
+		84FE5A7621A414FE00C97405 /* ViewForCarousel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FE5A7521A414FE00C97405 /* ViewForCarousel.xib */; };
+		9975009521AD56560054EA81 /* CarouselItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9975009321AD56560054EA81 /* CarouselItemCollectionViewCell.swift */; };
+		9975009621AD56560054EA81 /* CarouselItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9975009421AD56560054EA81 /* CarouselItemCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		84FE5A5D21A0951900C97405 /* TestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84FE5A6121A0951900C97405 /* TestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppUITests.swift; sourceTree = "<group>"; };
 		84FE5A6321A0951900C97405 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84FE5A7321A414E500C97405 /* ViewForCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewForCarousel.swift; sourceTree = "<group>"; };
+		84FE5A7521A414FE00C97405 /* ViewForCarousel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewForCarousel.xib; sourceTree = "<group>"; };
+		9975009321AD56560054EA81 /* CarouselItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		9975009421AD56560054EA81 /* CarouselItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarouselItemCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,10 @@
 				84FE5A4821A0951900C97405 /* Assets.xcassets */,
 				84FE5A4A21A0951900C97405 /* LaunchScreen.storyboard */,
 				84FE5A4D21A0951900C97405 /* Info.plist */,
+				84FE5A7321A414E500C97405 /* ViewForCarousel.swift */,
+				84FE5A7521A414FE00C97405 /* ViewForCarousel.xib */,
+				9975009321AD56560054EA81 /* CarouselItemCollectionViewCell.swift */,
+				9975009421AD56560054EA81 /* CarouselItemCollectionViewCell.xib */,
 			);
 			path = TestApp;
 			sourceTree = "<group>";
@@ -229,7 +241,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FE5A7621A414FE00C97405 /* ViewForCarousel.xib in Resources */,
 				84FE5A4C21A0951900C97405 /* LaunchScreen.storyboard in Resources */,
+				9975009621AD56560054EA81 /* CarouselItemCollectionViewCell.xib in Resources */,
 				84FE5A4921A0951900C97405 /* Assets.xcassets in Resources */,
 				84FE5A4721A0951700C97405 /* Main.storyboard in Resources */,
 			);
@@ -256,6 +270,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9975009521AD56560054EA81 /* CarouselItemCollectionViewCell.swift in Sources */,
+				84FE5A7421A414E500C97405 /* ViewForCarousel.swift in Sources */,
 				84FE5A4421A0951700C97405 /* ViewController.swift in Sources */,
 				84FE5A4221A0951700C97405 /* AppDelegate.swift in Sources */,
 			);
@@ -433,12 +449,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ83JPX57J;
 				INFOPLIST_FILE = TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "shweta-s-org.TestApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shweta.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -450,12 +467,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = RJ83JPX57J;
 				INFOPLIST_FILE = TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "shweta-s-org.TestApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shweta.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
