@@ -32,10 +32,12 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
         view.hasFooter = hasFooter
         view.visiblePart = visiblePart
         view.collectionView.register(UINib(nibName: "CarouselItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        view.collectionView.register(UINib(nibName: "FooterView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
+
         view.configureCollectionViewLayoutItemSize()
         //UI changes in view
         view.frame = frameOfView
-        view.backgroundColor = backGroundColor        
+        view.backgroundColor = backGroundColor
         //for circurlar carousel
         if isCircular {
         let indexPath = IndexPath(row: (arrayOfImage.count * 15), section: 0)
@@ -122,6 +124,18 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let sizeOfCell = CGSize(width: widthOfCell, height: frameOfView.height)
         return sizeOfCell
+    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+            
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath) as! FooterView
+            return footer
+            
+        default:
+            
+            assert(false, "Unexpected element kind")
+        }
     }
 }
 extension UIView {
