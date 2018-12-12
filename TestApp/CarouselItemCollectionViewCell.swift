@@ -10,6 +10,8 @@ import UIKit
 
 class CarouselItemCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var rightSepration: NSLayoutConstraint!
+    @IBOutlet weak var leftSepration: NSLayoutConstraint!
     @IBOutlet weak var imageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

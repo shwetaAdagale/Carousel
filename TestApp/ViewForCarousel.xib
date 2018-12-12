@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-WM-wmM">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-WM-wmM">
+                    <rect key="frame" x="0.0" y="20" width="375" height="547"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fzQ-Ha-hqB">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fzQ-Ha-hqB">
                         <size key="itemSize" width="300" height="400"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -29,18 +29,29 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="DBQ-m2-gMd"/>
                     </connections>
                 </collectionView>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qAR-Tv-cKB">
+                    <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="91e-HR-gma"/>
+                    </constraints>
+                </pageControl>
             </subviews>
             <color key="backgroundColor" red="0.82996906729999997" green="0.1367522783" blue="0.76530084300000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6NR-WM-wmM" secondAttribute="bottom" id="78m-B9-okE"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6NR-WM-wmM" secondAttribute="trailing" id="8TJ-X0-bvB"/>
+                <constraint firstItem="qAR-Tv-cKB" firstAttribute="firstBaseline" secondItem="6NR-WM-wmM" secondAttribute="baseline" id="9td-4P-A5s"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="qAR-Tv-cKB" secondAttribute="bottom" id="D2Z-w6-egH"/>
+                <constraint firstItem="6NR-WM-wmM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="DZE-Mg-iOU"/>
+                <constraint firstItem="qAR-Tv-cKB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GHM-cz-AOs"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qAR-Tv-cKB" secondAttribute="trailing" id="bUg-R5-1TT"/>
                 <constraint firstItem="6NR-WM-wmM" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="nkf-se-iED"/>
-                <constraint firstItem="6NR-WM-wmM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xNR-pR-8Lf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="collectionView" destination="6NR-WM-wmM" id="uKo-eU-eIA"/>
                 <outlet property="collectionViewFlowLayout" destination="fzQ-Ha-hqB" id="bXX-de-Bev"/>
+                <outlet property="heightOfPageControl" destination="91e-HR-gma" id="HUH-LS-VqG"/>
+                <outlet property="pageControl" destination="qAR-Tv-cKB" id="BqN-OC-4yZ"/>
             </connections>
         </view>
     </objects>

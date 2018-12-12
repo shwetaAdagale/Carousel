@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let frameForView = CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.size.height / 3))
         //visible part of cell
-        let view1 = ViewForCarousel.instantiate(arrayOfImage: arrayOfImage, isCircular: true, sepration: 20.0, visiblePercentageOfPeekingCell : 0.05 , hasFooter: false, frameOfView: frameForView, backGroundColor: .red)
+        let view1 = ViewForCarousel.instantiate(arrayOfImage: arrayOfImage, isCircular: true, sepration: 3.0, visiblePercentageOfPeekingCell : 0.2 , hasFooter: true, frameOfView: frameForView, backGroundColor: .magenta)
         self.view.addSubview(view1)
         
     }

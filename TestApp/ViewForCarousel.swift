@@ -13,7 +13,9 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     private var indexOfCellBeforeDragging = 0
-
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var heightOfPageControl: NSLayoutConstraint!
+    
     var arrayOfImage : [String] = []
     var isCircular : Bool!
     var sepration : CGFloat!
@@ -21,6 +23,15 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
     var widthOfCell : CGFloat!
     var frameOfView : CGRect!
     var visiblePart : CGFloat!
+    var countOfArray : Int {
+        get {
+            if isCircular {
+                return arrayOfImage.count * 30
+            } else {
+                return arrayOfImage.count
+            }
+        }
+    }
     
     static func instantiate(arrayOfImage : [String], isCircular : Bool, sepration : CGFloat, visiblePercentageOfPeekingCell visiblePart : CGFloat, hasFooter : Bool,frameOfView : CGRect, backGroundColor : UIColor) -> ViewForCarousel {
          let view: ViewForCarousel = initFromNib()
@@ -38,10 +49,20 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
         //UI changes in view
         view.frame = frameOfView
         view.backgroundColor = backGroundColor
+        view.pageControl.numberOfPages = arrayOfImage.count
+        view.heightOfPageControl.constant = 0
+        view.pageControl.isHidden = true
         //for circurlar carousel
         if isCircular {
         let indexPath = IndexPath(row: (arrayOfImage.count * 15), section: 0)
-        view.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            DispatchQueue.main.async {
+                view.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            }
+            view.pageControl.currentPage = indexPath.row % arrayOfImage.count
+        }
+        if hasFooter {
+            view.pageControl.isHidden = false
+            view.heightOfPageControl.constant = 20
         }
         view.collectionViewFlowLayout.minimumLineSpacing = 0
         return view
@@ -69,11 +90,9 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     private func indexOfMajorCell() -> Int {
-//        let itemWidth = collectionViewFlowLayout.itemSize.width
-//        let proportionalOffset = collectionViewFlowLayout.collectionView!.contentOffset.x / itemWidth
         let proportionalOffset = collectionViewFlowLayout.collectionView!.contentOffset.x / widthOfCell
         let index = Int(round(proportionalOffset))
-        let safeIndex = max(0, min((arrayOfImage.count * 30) - 1, index))
+        let safeIndex = max(0, min(countOfArray - 1, index))
         return safeIndex
     }
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -88,7 +107,7 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
         
         // calculate conditions:
         let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
-        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < (arrayOfImage.count * 30) && velocity.x > swipeVelocityThreshold
+        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < countOfArray && velocity.x > swipeVelocityThreshold
         let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
         let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
         let didUseSwipeToSkipCell = majorCellIsTheCellBeforeDragging && (hasEnoughVelocityToSlideToTheNextCell || hasEnoughVelocityToSlideToThePreviousCell)
@@ -98,22 +117,22 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
             let snapToIndex = indexOfCellBeforeDragging + (hasEnoughVelocityToSlideToTheNextCell ? 1 : -1)
             let indexPath = IndexPath(row: snapToIndex, section: 0)
             collectionViewFlowLayout.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            pageControl.currentPage = indexPath.row % arrayOfImage.count
         } else {
-            // This is a much better way to scroll to a cell:
             let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
             collectionViewFlowLayout.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            pageControl.currentPage = indexPath.row % arrayOfImage.count
+
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isCircular {
-            return arrayOfImage.count * 30
-        } else {
-            return arrayOfImage.count
-        }
+        return countOfArray
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CarouselItemCollectionViewCell
+        cell.rightSepration.constant = sepration / 2
+        cell.leftSepration.constant = sepration / 2
         var index = indexPath.row
         if isCircular {
            index = indexPath.row % arrayOfImage.count
@@ -125,21 +144,12 @@ class ViewForCarousel: UIView ,UICollectionViewDelegate, UICollectionViewDataSou
         let sizeOfCell = CGSize(width: widthOfCell, height: frameOfView.height)
         return sizeOfCell
     }
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-            
-        case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath) as! FooterView
-            return footer
-            
-        default:
-            
-            assert(false, "Unexpected element kind")
-        }
-    }
 }
 extension UIView {
     class func initFromNib<T: UIView>() -> T {
         return Bundle.main.loadNibNamed(String(describing: self), owner: nil, options: nil)?[0] as! T
     }
+}
+protocol CarouselImageDelegate {
+    func setImageForCarouselDelegate()
 }
